@@ -40,12 +40,12 @@ export default function InviteSetupPage() {
     try {
       const filteredNames = names.filter(name => name.trim());
       const { session_id, admin_secret } = await createSession(filteredNames);
-      const base = window.location.origin;
+  const base = window.location.origin + '/stable-roommates';
       const inviteLinks = filteredNames.map(name =>
-        `${base}/invite?session=${session_id}&user=${encodeURIComponent(name)}`
+  `${base}/invite?session=${session_id}&user=${encodeURIComponent(name)}`
       );
       setLinks(inviteLinks);
-      setAdminLink(`${base}/admin?session=${session_id}&secret=${admin_secret}`);
+  setAdminLink(`${base}/admin?session=${session_id}&secret=${admin_secret}`);
     } catch (err) {
       setWarning("Error creating session. Please try again.");
       setLinks([]);

@@ -12,9 +12,9 @@ import "./styles/main.css";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/stable-roommates">
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+  <Route index element={<LandingPage />} />
         <Route path="/manual" element={<ManualEntryPage />} />
         <Route path="/preferences" element={<PreferencesEntryPage />} />
         <Route path="/invite-setup" element={<InviteSetupPage />} />

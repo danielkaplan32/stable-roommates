@@ -224,9 +224,9 @@ export default function AdminPage() {
   // State for links dialog
   const [showLinks, setShowLinks] = useState(false);
   // Generate links for dialog
-  const baseUrl = window.location.origin;
+  const baseUrl = window.location.origin + '/stable-roommates';
   const participantLinks = participants.map(
-    name => `${baseUrl}/invite?session=${sessionId}&user=${encodeURIComponent(name)}`
+  name => `${baseUrl}/invite?session=${sessionId}&user=${encodeURIComponent(name)}`
   );
   const adminLink = `${baseUrl}/admin?session=${sessionId}&secret=${adminSecret}`;
   const CredentialBox = ({

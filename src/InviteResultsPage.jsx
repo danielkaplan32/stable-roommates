@@ -110,7 +110,7 @@ export default function InviteResultsPage() {
             fontSize: "1rem",
             cursor: "pointer"
           }}
-          onClick={() => navigate(`/invite?session=${sessionId}&user=${username}`)}
+          onClick={() => navigate(`/stable-roommates/invite?session=${sessionId}&user=${username}`)}
         >
           Go to Preferences Entry
         </button>
