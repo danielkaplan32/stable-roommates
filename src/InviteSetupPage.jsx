@@ -38,14 +38,22 @@ export default function InviteSetupPage() {
     setWarning("");
     setLoading(true);
     try {
-      const filteredNames = names.filter(name => name.trim());
+      let filteredNames = names.filter(name => name.trim());
+      let addedDummy = false;
+      if (filteredNames.length % 2 === 1) {
+        filteredNames = [...filteredNames, "No Match (dummy)"];
+        addedDummy = true;
+      }
       const { session_id, admin_secret } = await createSession(filteredNames);
-  const base = window.location.origin + '/stable-roommates';
+      const base = window.location.origin + '/stable-roommates';
       const inviteLinks = filteredNames.map(name =>
-  `${base}/invite?session=${session_id}&user=${encodeURIComponent(name)}`
+        `${base}/invite?session=${session_id}&user=${encodeURIComponent(name)}`
       );
       setLinks(inviteLinks);
-  setAdminLink(`${base}/admin?session=${session_id}&secret=${admin_secret}`);
+      setAdminLink(`${base}/admin?session=${session_id}&secret=${admin_secret}`);
+      if (addedDummy) {
+        setWarning("Odd number of participants detected. A dummy participant ('No Match (dummy)') was added so everyone can be matched. One person will not be matched in the final results.");
+      }
     } catch (err) {
       setWarning("Error creating session. Please try again.");
       setLinks([]);
