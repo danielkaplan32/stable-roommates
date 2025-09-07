@@ -23,7 +23,7 @@ export default function AdminReturnDialog({ open, onClose }) {
       return;
     }
     onClose();
-  navigate(`/stable-roommates/admin?session=${sessionId}&secret=${adminSecret}`);
+  navigate(`/admin?session=${sessionId}&secret=${adminSecret}`);
   };
 
   if (!open) return null;

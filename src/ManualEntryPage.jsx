@@ -51,15 +51,16 @@ export default function ManualEntryPage() {
       let finalPrefs = prefs;
       let oddMsg = "";
       if (finalNames.length % 2 === 1) {
-        finalNames = [...finalNames, "Dummy"];
+        finalNames = [...finalNames, "No Match (dummy)"];
         finalPrefs = [...finalPrefs, []];
-        oddMsg = "Odd number of participants detected in CSV. A 'Dummy' participant has been added and will be paired with someone.";
+        oddMsg = "Odd number of participants detected. A dummy participant ('No Match (dummy)') was added so everyone can be matched. One person will not be matched in the final results.";
       }
-      setCsvParticipants(finalNames);
-      setCsvPrefs(finalPrefs);
-      setCsvWarning(warning);
-      setOddNote(oddMsg);
-      setCsvReady(true);
+  setCsvParticipants(finalNames);
+  setCsvPrefs(finalPrefs);
+  setCsvWarning(warning);
+  setOddNote(oddMsg);
+  setCsvReady(true);
+  setParticipants(finalNames); // Populate the Add Participants UI with parsed names
     };
     reader.readAsText(file);
   };
@@ -95,8 +96,8 @@ export default function ManualEntryPage() {
     let finalFiltered = filtered;
     let oddMsg = "";
     if (finalFiltered.length % 2 === 1) {
-      finalFiltered = [...finalFiltered, "Dummy"];
-      oddMsg = "Odd number of participants detected. A 'Dummy' participant has been added and will be paired with someone.";
+        finalFiltered = [...finalFiltered, "No Match (dummy)"];
+        oddMsg = "Odd number of participants detected. A dummy participant ('No Match (dummy)') was added so everyone can be matched. One person will not be matched in the final results.";
     }
     setOddNote(oddMsg);
     navigate("/preferences", {
@@ -221,9 +222,6 @@ export default function ManualEntryPage() {
         <h2 style={{ marginBottom: "1.2rem", color: "#357ae8" }}>Or Upload CSV/TXT</h2>
         {csvWarning && (
           <div style={{ color: "#d32f2f", marginBottom: "0.8rem", fontWeight: "500" }}>{csvWarning}</div>
-        )}
-        {oddNote && csvReady && (
-          <div style={{ color: "#357ae8", marginBottom: "0.8rem", fontWeight: "500" }}>{oddNote}</div>
         )}
         <div style={{ marginBottom: "1rem", fontSize: "0.95rem", color: "#555" }}>
           <strong>Example format:</strong>
